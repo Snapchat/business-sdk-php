@@ -7,7 +7,7 @@
 PHP 7.4 and later.
 Should also work with PHP 8.0.
 
-### Composer (coming soon ...)
+### Composer
 To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
 
 ```json
@@ -19,7 +19,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "GIT_USER_ID/GIT_REPO_ID": "*@dev"
+    "Snapchat/business-sdk-php": "release"
   }
 }
 ```
@@ -32,7 +32,7 @@ Download the files and include `autoload.php`:
 
 ```php
 <?php
-require_once('/path/to/snap/business-sdk-php/vendor/autoload.php');
+require_once('/path/to/SnapBusinessSDK/vendor/autoload.php');
 ```
 
 ## Getting Started
