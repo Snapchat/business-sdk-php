@@ -19,7 +19,7 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
     }
   ],
   "require": {
-    "Snapchat/business-sdk-php": "release"
+    "Snapchat/business-sdk-php": "dev-release"
   }
 }
 ```
