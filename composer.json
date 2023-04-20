@@ -1,5 +1,7 @@
 {
+    "name": "youcan/business-sdk-php",
     "version": "1.0.1",
+    "description": "PHP Business SDK for Snap Conversion API)",
     "keywords": [
         "snap",
         "snapchat",
