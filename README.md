@@ -49,21 +49,23 @@ require_once(__DIR__ . '../../..'. '/vendor/autoload.php');
 use \SnapBusinessSDK\Api\ConversionApi;
 use \SnapBusinessSDK\Model\CapiEvent;
 use SnapBusinessSDK\Util\CapiConstants;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-const API_TOKEN = 'YOUR_API_TOKEN';
-const PIXEL_ID = 'YOUR_PIXEL_ID';
-const LAUNCH_PAD_URL = 'http://localhost:8080';
+$apiToken = $_ENV['API_TOKEN'];
+$pixelId = $_ENV['PIXEL_ID'];
+$launchPadUrl = $_ENV['LAUNCH_PAD_URL']; //http://localhost:8080
 
-$capi = new ConversionApi(API_TOKEN);
+$capi = new ConversionApi($apiToken);
 // Please use the following line if the LaunchPad is available.
-// $capi = new ConversionApi(API_TOKEN, LAUNCH_PAD_URL);
+// $capi = new ConversionApi($apiToken, $launchPadUrl);
 
 // (Optional) Enable logging
 $capi->setDebugging(true);
 
 // Use Case 1: Send an event asynchronously
 $capiEvent1 = (new CapiEvent())
-    ->setPixelId(PIXEL_ID)
+    ->setPixelId($pixelId)
     ->setEventConversionType('WEB')
     ->setEventType('CUSTOM_EVENT_1')
     ->setTimestamp('1656022510346')
@@ -77,7 +79,7 @@ $capi->sendEvent($capiEvent1);
 
 // Use Case 2: Send batching events asynchronously (up to 2000 events in one batch)
 $capiEvent2 = (new CapiEvent())
-    ->setPixelId(PIXEL_ID)
+    ->setPixelId($pixelId)
     ->setEventConversionType('WEB')
     ->setEventType('CUSTOM_EVENT_2')
     ->setTimestamp('1656022510346')
@@ -95,17 +97,17 @@ $response2 = $capi->sendTestEvents([$capiEvent1, $capiEvent2]);
 echo implode($response2);
  
 // Get the test event logs in the last 24 hrs
-$response3 = $capi->getTestEventLogs(PIXEL_ID);
+$response3 = $capi->getTestEventLogs($pixelId);
 echo $response3;
 
 // Get the stats in the last hour
-$response4 = $capi->getTestEventStats(PIXEL_ID);
+$response4 = $capi->getTestEventStats($pixelId);
 echo $response4;
 ```
 
 ### Initialization
-- Please use ConversionApi(API_TOKEN, LAUNCH_PAD_URL) if the Launch Pad has been set up under your domain. Conversion events will be forwarded to Snap transparently. (Other MPC features will be introduced in later versions).
-- Otherwise, you can initiate the instance using ConversionApi(API_TOKEN).Conversion events are sent back to Snap from the business SDK directly.
+- Please use ConversionApi($launchPadUrl, $launchPadUrl) if the Launch Pad has been set up under your domain. Conversion events will be forwarded to Snap transparently. (Other MPC features will be introduced in later versions).
+- Otherwise, you can initiate the instance using ConversionApi($launchPadUrl).Conversion events are sent back to Snap from the business SDK directly.
 
 ### API Token
 - To use the Conversions API, you need to use the access token for auth. See here to generate the token.
